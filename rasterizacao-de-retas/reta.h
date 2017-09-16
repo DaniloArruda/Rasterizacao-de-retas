@@ -2,6 +2,7 @@
 #define RETA_H
 
 #include "ponto.h"
+#include "util.h"
 
 class Reta
 {
@@ -29,6 +30,7 @@ public:
 
     void draw();
     void drawDDA();
+    void drawMidpoint();
 };
 
 #endif // RETA_H

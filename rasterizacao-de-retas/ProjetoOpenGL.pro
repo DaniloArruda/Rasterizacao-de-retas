@@ -9,10 +9,12 @@ SOURCES += main.cpp \
     MeuPainelOpenGL.cpp \
     reta.cpp \
     ponto.cpp \
-    malha.cpp
+    malha.cpp \
+    util.cpp
 HEADERS += JanelaPrincipal.h \
     MeuPainelOpenGL.h \
     reta.h \
     ponto.h \
-    malha.h
+    malha.h \
+    util.h
 FORMS += JanelaPrincipal.ui

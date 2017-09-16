@@ -1,6 +1,7 @@
 #include "reta.h"
 #include <GL/glu.h>
 #include "math.h"
+#include "util.h"
 
 Reta::Reta()
 {
@@ -96,3 +97,87 @@ void Reta::drawDDA() {
     }
 }
 
+void Reta::drawMidpoint() {
+    int a, b, d, x, y, incE, incNE, dx, dy, x1, x2, y1, y2, xDraw, yDraw;
+    bool declive, simetrico;
+
+    x1 = ponto1.getX();
+    x2 = ponto2.getX();
+
+    y1 = ponto1.getY();
+    y2 = ponto2.getY();
+
+    dx = getdx();
+    dy = getdy();
+
+
+    //inicio do processo de conversão de qualquer octante para o primeiro octante
+    declive = false;
+    simetrico = false;
+
+    if(dx * dy < 0) {
+        dy = -dy;
+        y1 = -y1;
+        y2 = -y2;
+
+        simetrico = true;
+    }
+
+    if(abs(dx) < abs(dy)){
+        Util::trocar(&x1, &y1);
+        Util::trocar(&x2, &y2);
+
+        declive = true;
+    }
+
+    if(x1 > x2){
+        Util::trocar(&x1, &x2);
+        Util::trocar(&y1, &y2);
+    }
+    //fim do processo de conversão de octantes
+
+    a = y2 - y1;
+    b = -x2 + x1;
+
+    x = x1;
+    y = y1;
+    xDraw = x1;
+    yDraw = y1;
+
+    incE = 2*a;
+    incNE = 2*(a + b);
+
+    //verifica e converte de volta ao primeiro octante
+    if(declive){
+        Util::trocar(&xDraw, &yDraw);
+    }
+    if(simetrico){
+        yDraw = -yDraw;
+    }
+    //fim de verificacao de octante
+
+    drawPixel(xDraw,yDraw);
+    d = 2*a + b;
+    while(x < x2){
+        if(d <= 0){
+            d += incE;
+            x++;
+        } else{
+            d += incNE;
+            x++;
+            y++;
+        }
+        xDraw = x;
+        yDraw = y;
+
+        //verifica e converte de volta ao primeiro octante
+        if(declive){
+            Util::trocar(&xDraw, &yDraw);
+        }
+        if(simetrico){
+            yDraw = -yDraw;
+        }
+        //fim de verificacao de octante
+        drawPixel(xDraw,yDraw);
+    }
+}
