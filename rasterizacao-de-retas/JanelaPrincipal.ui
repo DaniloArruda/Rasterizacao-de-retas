@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>JanelaPrincipal</class>
+ <widget class="QWidget" name="JanelaPrincipal">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>594</width>
+    <height>410</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Projeto OpenGL</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="1">
+    <widget class="QSpinBox" name="spinBoxX1">
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QSpinBox" name="spinBoxY1"/>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>X2</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="12">
+    <widget class="MeuPainelOpenGL" name="painelGL" native="true"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QSpinBox" name="sizePainelSpinBox">
+     <property name="maximumSize">
+      <size>
+       <width>75</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="minimum">
+      <number>3</number>
+     </property>
+     <property name="maximum">
+      <number>60</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>72</width>
+       <height>270</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="1">
+    <widget class="QSpinBox" name="spinBoxX2">
+     <property name="value">
+      <number>5</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>X1</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Tamanho do painel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Y1</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Y2</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="maximumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Sair</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QSpinBox" name="spinBoxY2">
+     <property name="value">
+      <number>5</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MeuPainelOpenGL</class>
+   <extends>QWidget</extends>
+   <header>MeuPainelOpenGL.h</header>
+   <container>1</container>
+   <slots>
+    <slot>changeSizePanel(int)</slot>
+    <slot>setStartPointX(int)</slot>
+    <slot>setEndPointX(int)</slot>
+    <slot>setStartPointY(int)</slot>
+    <slot>setEndPointY(int)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>JanelaPrincipal</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>388</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>587</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sizePainelSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>painelGL</receiver>
+   <slot>changeSizePanel(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>541</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxX1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>painelGL</receiver>
+   <slot>setStartPointX(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>248</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxX2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>painelGL</receiver>
+   <slot>setEndPointX(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>248</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxY1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>painelGL</receiver>
+   <slot>setStartPointY(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>248</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxY2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>painelGL</receiver>
+   <slot>setEndPointY(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>217</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>248</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
