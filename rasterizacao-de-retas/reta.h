@@ -10,6 +10,8 @@ private:
     Ponto ponto2;
 
     void drawPixel(int x, int y);
+    int getdx();
+    int getdy();
 
 public:
     Reta();

@@ -63,35 +63,36 @@ void Reta::drawPixel(int x, int y) {
     glEnd();
 }
 
+int Reta::getdx() {
+    return ponto2.getX() - ponto1.getX();
+}
+
+int Reta::getdy() {
+    return ponto2.getY() - ponto1.getY();
+}
+
 void Reta::drawDDA() {
-    int length, distanciaX, distanciaY;
-    float X,Y,Xinc,Yinc;
+    int length, dx, dy;
+    float x, y, xInc, yInc;
 
-    distanciaX = ponto2.getX() - ponto1.getX();
-    distanciaY = ponto2.getY() - ponto1.getY();
+    dx = getdx();
+    dy = getdy();
 
-    if (distanciaX > distanciaY)
-        length = abs(distanciaX);
+    if (abs(dx) > abs(dy))
+        length = abs(dx);
     else
-        length = abs(distanciaY);
+        length = abs(dy);
 
-    Xinc = (float) distanciaX/length;
-    Yinc = (float) distanciaY/length;
+    xInc = (float) dx/length;
+    yInc = (float) dy/length;
 
-    X = ponto1.getX();
-    Y = ponto1.getY();
+    x = ponto1.getX();
+    y = ponto1.getY();
 
-    if (distanciaX > distanciaY) {
-        while(X <= ponto2.getX()){
-            drawPixel(round(X), round(Y));
-            X = X + Xinc;
-            Y = Y + Yinc;
-        }
-    } else {
-        while(Y <= ponto2.getY()){
-            drawPixel(round(X), round(Y));
-            X = X + Xinc;
-            Y = Y + Yinc;
-        }
+    for (int i = 0; i <= length; i++) {
+        drawPixel(round(x), round(y));
+        x += xInc;
+        y += yInc;
     }
 }
+
