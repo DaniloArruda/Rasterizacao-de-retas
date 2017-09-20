@@ -12,8 +12,6 @@ public:
 
     static int maior(int valor1, int valor2);
     static int menor(int valor1, int valor2);
-
-    static int round(float n);
 };
 
 #endif // UTIL_H

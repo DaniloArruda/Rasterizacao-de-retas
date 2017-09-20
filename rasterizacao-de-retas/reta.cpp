@@ -98,106 +98,56 @@ void Reta::drawDDA() {
 }
 
 void Reta::drawMidpoint() {
-    int a, b, d, x, y, incE, incNE, dx, dy, x1, x2, y1, y2, xDraw, yDraw;
-    bool declive, simetrico;
+    int dx, dy, d, incE, incNE, x, y, x1, y1, x2, y2, xDraw, yDraw;
+    bool symmetric, slope;
+
+    symmetric = slope = false;
 
     x1 = ponto1.getX();
-    x2 = ponto2.getX();
-
     y1 = ponto1.getY();
+    x2 = ponto2.getX();
     y2 = ponto2.getY();
 
     dx = getdx();
     dy = getdy();
 
-    //inicio do processo de conversão de qualquer octante para o primeiro octante
-    declive = false;
-    simetrico = false;
-
-    if(dx * dy < 0) {
-        dy = -dy;
+    if (dx * dy < 0) { // to set positive slope
         y1 = -y1;
         y2 = -y2;
-
-        simetrico = true;
+        dy = -dy;
+        symmetric = true;
     }
 
-    if(abs(dx) < abs(dy)){
+    if (abs(dx) < abs(dy)) { // to set slope in first octant
         Util::trocar(&x1, &y1);
         Util::trocar(&x2, &y2);
-
-        declive = true;
+        Util::trocar(&dx, &dy);//
+        slope = true;
     }
 
-    if(x1 > x2){
+    if (x1 > x2) { // to set the point 1 less than point 2
         Util::trocar(&x1, &x2);
         Util::trocar(&y1, &y2);
+        dx = -dx;
+        dy = -dy;
     }
-    //fim do processo de conversão de octantes
 
-    a = y2 - y1;
-    b = -x2 + x1;
+    x = xDraw = x1;
+    y = yDraw = y1;
 
-    x = x1;
-    y = y1;
-    xDraw = x1;
-    yDraw = y1;
-
-    incE = 2*a;
-    incNE = 2*(a + b);
-
-    //verifica e converte de volta ao primeiro octante
-    if(declive){
+    if(slope)
         Util::trocar(&xDraw, &yDraw);
-    }
-    if(simetrico){
+
+    if (symmetric)
         yDraw = -yDraw;
-    }
-    //fim de verificacao de octante
 
-    drawPixel(xDraw,yDraw);
-    d = 2*a + b;
-    while(x < x2){
-        if(d <= 0){
-            d += incE;
-            x++;
-        } else{
-            d += incNE;
-            x++;
-            y++;
-        }
-        xDraw = x;
-        yDraw = y;
-
-        //verifica e converte de volta ao primeiro octante
-        if(declive){
-            Util::trocar(&xDraw, &yDraw);
-        }
-        if(simetrico){
-            yDraw = -yDraw;
-        }
-        //fim de verificacao de octante
-        drawPixel(xDraw,yDraw);
-    }
-}
-
-void Reta::drawMidpointCuia() {
-    int dx, dy, d, incE, incNE, x, y;
-
-    dx = getdx();
-    dy = getdy();
+    drawPixel(xDraw, yDraw);
 
     d = 2*dy - dx;
-
     incE = 2*dy;
     incNE = 2*(dy - dx);
 
-    x = ponto1.getX();
-    y = ponto1.getY();
-
-    drawPixel(x, y);
-
-    while (x < ponto2.getX()) {
+    while (x < x2) {
         if (d <= 0) {
             d += incE;
         } else {
@@ -205,7 +155,17 @@ void Reta::drawMidpointCuia() {
             y++;
         }
         x++;
-        drawPixel(x, y);
+
+        xDraw = x;
+        yDraw = y;
+
+        if(slope)
+            Util::trocar(&xDraw, &yDraw);
+
+        if (symmetric)
+            yDraw = -yDraw;
+
+        drawPixel(xDraw, yDraw);
     }
 }
 

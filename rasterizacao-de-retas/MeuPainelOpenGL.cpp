@@ -74,7 +74,7 @@ void MeuPainelOpenGL::paintGL()
     reta.draw();
 
     glColor3f(0,1,0);
-    reta.drawExplictEquation();
+    reta.drawMidpointCuia();
 }
 
 void MeuPainelOpenGL::clear() {

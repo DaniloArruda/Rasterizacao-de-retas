@@ -14,6 +14,8 @@ private:
     int getdx();
     int getdy();
 
+    void setPositiveSlope();
+
 public:
     Reta();
     Reta(Ponto ponto1, Ponto ponto2);
@@ -32,7 +34,6 @@ public:
     void drawDDA();
     void drawMidpoint();
     void drawExplictEquation();
-    void drawMidpointCuia();
 };
 
 #endif // RETA_H
