@@ -215,10 +215,11 @@ void Reta::drawExplictEquation() {
     dx = getdx();
     dy = getdy();
 
-//    if (dx == 0)
-//        m = dy;
-//    else
-    m = dy/dx;
+    if (dx == 0)
+        m = dy;
+    else
+        m = dy/dx;
+
     b = ponto1.getY() - ponto1.getX()*m;
 
     xMin = ponto1.getX() < ponto2.getX() ? ponto1.getX() : ponto2.getX();
