@@ -110,7 +110,6 @@ void Reta::drawMidpoint() {
     dx = getdx();
     dy = getdy();
 
-
     //inicio do processo de conversão de qualquer octante para o primeiro octante
     declive = false;
     simetrico = false;
@@ -179,5 +178,54 @@ void Reta::drawMidpoint() {
         }
         //fim de verificacao de octante
         drawPixel(xDraw,yDraw);
+    }
+}
+
+void Reta::drawMidpointCuia() {
+    int dx, dy, d, incE, incNE, x, y;
+
+    dx = getdx();
+    dy = getdy();
+
+    d = 2*dy - dx;
+
+    incE = 2*dy;
+    incNE = 2*(dy - dx);
+
+    x = ponto1.getX();
+    y = ponto1.getY();
+
+    drawPixel(x, y);
+
+    while (x < ponto2.getX()) {
+        if (d <= 0) {
+            d += incE;
+        } else {
+            d += incNE;
+            y++;
+        }
+        x++;
+        drawPixel(x, y);
+    }
+}
+
+void Reta::drawExplictEquation() {
+    float b, m, x, y, xMin, xMax, dx, dy;
+
+    dx = getdx();
+    dy = getdy();
+
+//    if (dx == 0)
+//        m = dy;
+//    else
+    m = dy/dx;
+    b = ponto1.getY() - ponto1.getX()*m;
+
+    xMin = ponto1.getX() < ponto2.getX() ? ponto1.getX() : ponto2.getX();
+    xMax = ponto1.getX() > ponto2.getX() ? ponto1.getX() : ponto2.getX();
+
+    for (x = xMin; x <= xMax; x++) {
+        y = round(m*x + b);
+        drawPixel(x, y);
     }
 }

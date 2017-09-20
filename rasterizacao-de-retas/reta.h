@@ -31,6 +31,8 @@ public:
     void draw();
     void drawDDA();
     void drawMidpoint();
+    void drawExplictEquation();
+    void drawMidpointCuia();
 };
 
 #endif // RETA_H
