@@ -43,6 +43,26 @@ void MeuPainelOpenGL::setEndPointY(int value) {
     updateGL();
 }
 
+void MeuPainelOpenGL::setShowRetaPrincipal(bool value) {
+    showRetaPrincipal = value;
+    updateGL();
+}
+
+void MeuPainelOpenGL::setShowDDA(bool value) {
+    showDDA = value;
+    updateGL();
+}
+
+void MeuPainelOpenGL::setShowExplictEquation(bool value) {
+    showExplictEquation = value;
+    updateGL();
+}
+
+void MeuPainelOpenGL::setShowMidpoint(bool value) {
+    showMidpoint = value;
+    updateGL();
+}
+
 void MeuPainelOpenGL::initializeGL()
 {
     glShadeModel(GL_SMOOTH);
@@ -70,11 +90,26 @@ void MeuPainelOpenGL::paintGL()
     glColor3f(0,0,0);
     malha.draw();
 
-    glColor3f(1,0,0);
-    reta.draw();
+    if (showRetaPrincipal) {
+        glColor3f(1,0,0);
+        reta.draw();
+    }
 
-    glColor3f(0,1,0);
-    reta.drawMidpointCuia();
+    if (showDDA) {
+        glColor3f(0,1,1);
+        reta.drawDDA();
+    }
+
+    if (showExplictEquation) {
+        glColor3f(0,0,1);
+        reta.drawExplictEquation();
+    }
+
+    if (showMidpoint) {
+        glColor3f(0,1,0);
+        reta.drawMidpoint();
+    }
+
 }
 
 void MeuPainelOpenGL::clear() {

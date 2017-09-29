@@ -19,6 +19,10 @@ public slots:
     void setStartPointY(int value);
     void setEndPointX(int value);
     void setEndPointY(int value);
+    void setShowRetaPrincipal(bool value);
+    void setShowDDA(bool value);
+    void setShowExplictEquation(bool value);
+    void setShowMidpoint(bool value);
 
 protected:
     void initializeGL();
@@ -33,6 +37,11 @@ private:
     int startPointY;
     int endPointX;
     int endPointY;
+
+    bool showRetaPrincipal;
+    bool showDDA;
+    bool showExplictEquation;
+    bool showMidpoint;
 
     void clear();
     void defineSizePanel();
